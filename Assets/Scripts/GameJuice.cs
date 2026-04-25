@@ -35,10 +35,16 @@ public class GameJuice : MonoBehaviour
     public CanvasGroup flashPanel;
     public float flashDuration = 0.18f;
 
+    // ── Ambient Wobble ────────────────────────────────────────────
+    [Header("Ambient Camera Wobble")]
+    [Tooltip("Permanent subtle wobble so the camera never feels dead/flat.")]
+    public float ambientAmplitude = 0.18f;
+
     // ── internals ────────────────────────────────────────────────
     private CinemachineBasicMultiChannelPerlin noise;
     private Coroutine shakeCoroutine;
     private Coroutine flashCoroutine;
+    private float currentAmplitude = 0f;
 
     // ─────────────────────────────────────────────────────────────
     //  Lifecycle
@@ -58,7 +64,16 @@ public class GameJuice : MonoBehaviour
     void Start()
     {
         FindNoise();
+        currentAmplitude = ambientAmplitude;
         Shake(startShakeDuration, startShakeAmplitude);
+    }
+
+    void Update()
+    {
+        // Keep noise always set to the current amplitude value.
+        // This ensures the ambient wobble is always applied even when no shake is running.
+        if (noise != null)
+            noise.AmplitudeGain = currentAmplitude;
     }
 
     void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -116,14 +131,13 @@ public class GameJuice : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            // Damp amplitude as shake nears its end
-            float damped = Mathf.Lerp(amplitude, 0f, elapsed / duration);
-            if (noise != null) noise.AmplitudeGain = damped;
-
+            // Damp from peak amplitude back down to the ambient baseline
+            currentAmplitude = Mathf.Lerp(amplitude, ambientAmplitude, elapsed / duration);
             elapsed += Time.unscaledDeltaTime; // unscaled: works during hit-freeze
             yield return null;
         }
-        if (noise != null) noise.AmplitudeGain = 0f;
+        // Settle back to the permanent ambient wobble — never fully flat
+        currentAmplitude = ambientAmplitude;
     }
 
     IEnumerator HitFreezeRoutine()

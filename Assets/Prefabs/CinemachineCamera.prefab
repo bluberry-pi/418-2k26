@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4775344137143667098}
   - component: {fileID: 6699225548962481728}
   - component: {fileID: 7348895012665814447}
+  - component: {fileID: 2495888835877402756}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -97,8 +98,8 @@ MonoBehaviour:
       Size: {x: 0.2, y: 0.1}
     HardLimits:
       Enabled: 1
-      Size: {x: 0.26, y: 0.2}
-      Offset: {x: 0.2, y: 0}
+      Size: {x: 0.41, y: 0.34}
+      Offset: {x: 0.07, y: 0}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 1, y: 1, z: 1}
@@ -107,3 +108,20 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &2495888835877402756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5382108624151618257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 0
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: -439.91745, y: 117.992065, z: 478.60287}
