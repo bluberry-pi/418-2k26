@@ -56,7 +56,7 @@ public class ToyManager : MonoBehaviour
     {
         if (currentToy != null && currentEnergy != null)
         {
-            if (currentToy.IsControlled && currentEnergy.HasEnergy)
+            if (currentToy.IsControlled && currentEnergy.HasEnergy && currentToy.IsMoving)
             {
                 currentEnergy.Deplete(Time.deltaTime);
             }

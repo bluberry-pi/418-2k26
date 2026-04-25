@@ -29,6 +29,8 @@ public class NormalToyMovement : MonoBehaviour
     public float walkWobbleReturnSpeed = 10f;
 
     public bool IsControlled { get; private set; } = false;
+    // True when the toy has horizontal input OR is airborne (jumping/falling)
+    public bool IsMoving => Mathf.Abs(horizontalInput) > 0.01f || !isGrounded;
 
     private Rigidbody2D rb;
     private float horizontalInput;
