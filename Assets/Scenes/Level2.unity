@@ -10486,7 +10486,7 @@ MonoBehaviour:
   wiggleAngle: 15
   wiggleSpeed: 8
   wiggleScaleAmount: 0.08
-  deathParticlePrefab: {fileID: 0}
+  deathParticlePrefab: {fileID: 3310245308953624941, guid: ac08a8f6d8feb9c478a92ddf985d1602, type: 3}
   deathExpandScale: 2.2
   deathDuration: 0.35
 --- !u!50 &771634702
@@ -11195,7 +11195,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 311537968949388428e0ab9f49162f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies: []
+  enemies:
+  - {fileID: 1401726555}
+  - {fileID: 771634701}
 --- !u!61 &817258467
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14769,9 +14771,9 @@ GameObject:
   - component: {fileID: 1059533004}
   - component: {fileID: 1059533005}
   - component: {fileID: 1059533006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Punch
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14819,7 +14821,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_Sprite: {fileID: 4505764762537584597, guid: 1a8962f4fc2188343ad3546682064848, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -14840,8 +14842,8 @@ Transform:
   m_GameObject: {fileID: 1059532999}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.02, y: -12.96, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -23.03, y: -13.14, z: 0}
+  m_LocalScale: {x: 0.79239625, y: 0.79239625, z: 0.79239625}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1235192180}
@@ -14864,11 +14866,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toyEnergy: {fileID: 1059533004}
   moveSpeed: 8
-  airSpeedMultiplier: 0.8
+  airSpeedMultiplier: 1
   acceleration: 13
   deceleration: 16
   airControlMultiplier: 0.5
-  jumpForce: 10
+  jumpForce: 8
   fallGravityMultiplier: 2.5
   riseGravityMultiplier: 1.4
   maxFallSpeed: 15
@@ -14923,7 +14925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 100
-  energyDepleteRate: 5
+  energyDepleteRate: 3
 --- !u!70 &1059533005
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -17536,7 +17538,7 @@ GameObject:
   - component: {fileID: 1235192180}
   - component: {fileID: 1235192179}
   - component: {fileID: 1235192181}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: gloveretract_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17586,7 +17588,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 3137456667623309166, guid: c68ee1729095d434682c3c1b4132e15f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -19409,6 +19411,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 1127621061249076996, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2320229038095224617, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
       propertyPath: m_SortingOrder
       value: -1
@@ -19806,7 +19812,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394571523}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20328,7 +20334,7 @@ MonoBehaviour:
   wiggleAngle: 15
   wiggleSpeed: 8
   wiggleScaleAmount: 0.08
-  deathParticlePrefab: {fileID: 0}
+  deathParticlePrefab: {fileID: 3310245308953624941, guid: ac08a8f6d8feb9c478a92ddf985d1602, type: 3}
   deathExpandScale: 2.2
   deathDuration: 0.35
 --- !u!50 &1401726556
@@ -24710,7 +24716,7 @@ Transform:
   m_GameObject: {fileID: 1699098265}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14, y: -14.21, z: 0}
+  m_LocalPosition: {x: -14, y: -14.35, z: 0}
   m_LocalScale: {x: 2.1686, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24730,9 +24736,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   targetY: -14.45
-  door: {fileID: 6388720103526487543}
+  door: {fileID: 161545540}
   doorSpeed: 2
   doorTargetY: -5.19
+  toyLayerName: Toy
 --- !u!61 &1699098270
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24963,7 +24970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1710818869}
   - component: {fileID: 1710818870}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
