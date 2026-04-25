@@ -4,7 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))] 
 public class KeyStart : MonoBehaviour
 {
-    public NormalToyMovement connectedToy;
+    [Header("Connected Toy (use one or the other)")]
+    public NormalToyMovement connectedToy;       // drag normal toy here
+    public AeroplaneMovement connectedAeroplane; // OR drag aeroplane here
     public ToyEnergy connectedEnergy;
 
     public Sprite[] frames;
@@ -44,10 +46,8 @@ public class KeyStart : MonoBehaviour
                 }
                 else
                 {
-                    if (ToyManager.Instance != null && connectedToy != null && connectedEnergy != null)
-                    {
-                        ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
-                    }
+                    // Re-click after started: switch control back to this toy
+                    SwitchControl();
                 }
             }
         }
@@ -82,10 +82,7 @@ public class KeyStart : MonoBehaviour
                 connectedEnergy.FillEnergy();
             }
 
-            if (ToyManager.Instance != null && connectedToy != null && connectedEnergy != null)
-            {
-                ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
-            }
+            SwitchControl();
         }
         else
         {
@@ -97,4 +94,21 @@ public class KeyStart : MonoBehaviour
             }
         }
     }
-}
+
+    private void SwitchControl()
+    {
+        if (ToyManager.Instance == null || connectedEnergy == null) return;
+
+        if (connectedAeroplane != null)
+        {
+            // Aeroplane path — ToyManager doesn't know about AeroplaneMovement directly,
+            // so we call SetControl manually and just update the slider via SwitchToy with null toy.
+            // We pass null for the NormalToyMovement and handle aeroplane control ourselves.
+            ToyManager.Instance.SwitchAeroplane(connectedAeroplane, connectedEnergy);
+        }
+        else if (connectedToy != null)
+        {
+            ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
+        }
+    }
+}

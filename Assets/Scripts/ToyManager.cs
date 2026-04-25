@@ -10,6 +10,7 @@ public class ToyManager : MonoBehaviour
     public CinemachineCamera virtualCamera;
 
     private NormalToyMovement currentToy;
+    private AeroplaneMovement currentAeroplane;
     private ToyEnergy currentEnergy;
 
     public NormalToyMovement CurrentToy => currentToy;
@@ -29,44 +30,68 @@ public class ToyManager : MonoBehaviour
 
     public void SwitchToy(NormalToyMovement newToy, ToyEnergy newEnergy)
     {
-        if (currentToy != null)
-        {
-            currentToy.SetControl(false);
-        }
+        // Revoke any current control
+        if (currentToy != null)       currentToy.SetControl(false);
+        if (currentAeroplane != null) currentAeroplane.SetControl(false);
+        currentAeroplane = null;
 
-        currentToy = newToy;
+        currentToy    = newToy;
         currentEnergy = newEnergy;
-        
-        if (currentToy != null)
-        {
-            currentToy.SetControl(true);
-        }
+
+        if (currentToy != null) currentToy.SetControl(true);
 
         if (virtualCamera != null && currentToy != null)
-        {
             virtualCamera.Follow = currentToy.transform;
-        }
 
         if (globalEnergySlider != null && currentEnergy != null)
         {
             globalEnergySlider.maxValue = currentEnergy.maxEnergy;
-            globalEnergySlider.value = currentEnergy.CurrentEnergy;
+            globalEnergySlider.value   = currentEnergy.CurrentEnergy;
+        }
+    }
+
+    public void SwitchAeroplane(AeroplaneMovement newPlane, ToyEnergy newEnergy)
+    {
+        // Revoke any current control
+        if (currentToy != null)       currentToy.SetControl(false);
+        if (currentAeroplane != null) currentAeroplane.SetControl(false);
+        currentToy = null;
+
+        currentAeroplane = newPlane;
+        currentEnergy    = newEnergy;
+
+        if (currentAeroplane != null) currentAeroplane.SetControl(true);
+
+        if (virtualCamera != null && currentAeroplane != null)
+            virtualCamera.Follow = currentAeroplane.transform;
+
+        if (globalEnergySlider != null && currentEnergy != null)
+        {
+            globalEnergySlider.maxValue = currentEnergy.maxEnergy;
+            globalEnergySlider.value   = currentEnergy.CurrentEnergy;
         }
     }
 
     private void Update()
     {
+        // Normal toy energy drain
         if (currentToy != null && currentEnergy != null)
         {
             if (currentToy.IsControlled && currentEnergy.HasEnergy && currentToy.IsMoving)
-            {
                 currentEnergy.Deplete(Time.deltaTime);
-            }
 
             if (globalEnergySlider != null)
-            {
                 globalEnergySlider.value = currentEnergy.CurrentEnergy;
-            }
+        }
+
+        // Aeroplane energy drain
+        if (currentAeroplane != null && currentEnergy != null)
+        {
+            if (currentAeroplane.IsControlled && currentEnergy.HasEnergy && currentAeroplane.IsMoving)
+                currentEnergy.Deplete(Time.deltaTime);
+
+            if (globalEnergySlider != null)
+                globalEnergySlider.value = currentEnergy.CurrentEnergy;
         }
     }
 }
