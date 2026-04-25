@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2320229038095224617}
   - component: {fileID: 2692878829299764966}
   - component: {fileID: 7241652096914814940}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,3 +160,4 @@ MonoBehaviour:
   framesPerSecond: 11.25
   framesToSkipOnClick: 2
   clicksToStartPlaying: 4
+  isPlayingNormally: 0

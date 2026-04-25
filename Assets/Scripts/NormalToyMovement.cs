@@ -3,31 +3,26 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class NormalToyMovement : MonoBehaviour
 {
-    [Header("Game Flow")]
-    [Tooltip("Drag the Key object here so the player knows when to start moving.")]
-    public KeyStart startingKey;
+    public ToyEnergy toyEnergy;
 
-    [Header("Movement")]
     public float moveSpeed = 8f;
     public float airSpeedMultiplier = 0.8f;
     public float acceleration = 13f;
     public float deceleration = 16f;
     public float airControlMultiplier = 0.5f;
     
-    [Header("Jumping")]
     public float jumpForce = 13f;
     public float fallGravityMultiplier = 2.5f;
     public float maxFallSpeed = 15f;
     public float coyoteTime = 0.15f;
     public float jumpBufferTime = 0.15f;
     
-    [Header("Environment")]
     public Transform groundCheck;
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
     public LayerMask groundLayer;
-
-    [Header("Visuals")]
     public float turnSpeed = 20f;
+
+    public bool IsControlled { get; private set; } = false;
 
     private Rigidbody2D rb;
     private float horizontalInput;
@@ -36,7 +31,6 @@ public class NormalToyMovement : MonoBehaviour
     private float defaultGravity;
     private bool isGrounded;
     private bool isFacingRight = true;
-    
     private float originalScaleX;
     private float targetScaleX;
 
@@ -44,9 +38,17 @@ public class NormalToyMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
-        
         originalScaleX = Mathf.Abs(transform.localScale.x);
         targetScaleX = originalScaleX;
+    }
+
+    public void SetControl(bool state)
+    {
+        IsControlled = state;
+        if (!state)
+        {
+            horizontalInput = 0f;
+        }
     }
 
     void Update()
@@ -69,10 +71,10 @@ public class NormalToyMovement : MonoBehaviour
             transform.localScale = currentScale;
         }
 
-        if (startingKey != null && !startingKey.isPlayingNormally)
+        if (!IsControlled || toyEnergy == null || !toyEnergy.HasEnergy)
         {
             horizontalInput = 0f;
-            return;
+            return; 
         }
 
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -111,6 +113,21 @@ public class NormalToyMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!IsControlled || toyEnergy == null || !toyEnergy.HasEnergy)
+        {
+            if (rb.linearVelocity.y < 0)
+            {
+                rb.gravityScale = defaultGravity * fallGravityMultiplier;
+            }
+            else
+            {
+                rb.gravityScale = defaultGravity;
+            }
+            
+            rb.linearVelocity = new Vector2(0f, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
+            return; 
+        }
+
         float currentSpeed = isGrounded ? moveSpeed : moveSpeed * airSpeedMultiplier;
         float targetSpeed = horizontalInput * currentSpeed;
         float speedDiff = targetSpeed - rb.linearVelocity.x;

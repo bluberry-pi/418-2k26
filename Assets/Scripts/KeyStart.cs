@@ -4,15 +4,14 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))] 
 public class KeyStart : MonoBehaviour
 {
-    [Header("Animation Settings")]
+    public NormalToyMovement connectedToy;
+    public ToyEnergy connectedEnergy;
+
     public Sprite[] frames;
     public float framesPerSecond = 11.25f;
     public int framesToSkipOnClick = 2; 
-
-    [Header("Interaction Settings")]
     public int clicksToStartPlaying = 4;
 
-    // CHANGED: This is now public so the player movement script can read it!
     public bool isPlayingNormally = false; 
 
     private SpriteRenderer spriteRenderer;
@@ -38,10 +37,17 @@ public class KeyStart : MonoBehaviour
             Collider2D hitCollider = Physics2D.OverlapPoint(mouseWorldPosition);
 
             if (hitCollider != null && hitCollider.gameObject == this.gameObject)
-            {                
+            {
                 if (!isPlayingNormally)
                 {
                     HandleInteraction();
+                }
+                else
+                {
+                    if (ToyManager.Instance != null && connectedToy != null && connectedEnergy != null)
+                    {
+                        ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
+                    }
                 }
             }
         }
@@ -62,10 +68,21 @@ public class KeyStart : MonoBehaviour
     private void HandleInteraction()
     {
         clickCount++;
+
         if (clickCount >= clicksToStartPlaying)
         {
             isPlayingNormally = true;
             timer = 0f; 
+            
+            if (connectedEnergy != null)
+            {
+                connectedEnergy.FillEnergy();
+            }
+
+            if (ToyManager.Instance != null && connectedToy != null && connectedEnergy != null)
+            {
+                ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
+            }
         }
         else
         {
