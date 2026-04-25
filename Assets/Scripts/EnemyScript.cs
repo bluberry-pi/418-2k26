@@ -55,22 +55,20 @@ public class EnemyScript : MonoBehaviour
         float dir = Mathf.Sign(target.position.x - transform.position.x);
         rb.linearVelocity = new Vector2(dir * moveSpeed, rb.linearVelocity.y);
 
-        // ── Flip sprite to face player ──────────────────────────
-        Vector3 s = transform.localScale;
-        s.x = Mathf.Abs(s.x) * (dir >= 0 ? 1f : -1f);
-        transform.localScale = s;
-
         // ── Wiggle: rotation + scale pulse ──────────────────────
         wiggleTimer += Time.deltaTime * wiggleSpeed;
 
         float rot = Mathf.Sin(wiggleTimer) * wiggleAngle;
         transform.localEulerAngles = new Vector3(0f, 0f, rot);
 
+        // Always derive scale from originalScale — never read back transform.localScale,
+        // or the modifications compound every frame (X→Infinity, Y→0)
+        float facing     = dir >= 0 ? 1f : -1f;
         float scalePulse = 1f + Mathf.Abs(Mathf.Sin(wiggleTimer * 0.5f)) * wiggleScaleAmount;
         transform.localScale = new Vector3(
-            s.x * scalePulse,
-            Mathf.Abs(s.y) * (1f / scalePulse), // squash/stretch: opposite axis
-            s.z
+            Mathf.Abs(originalScale.x) * facing * scalePulse,   // flip + squash X
+            originalScale.y / scalePulse,                        // squash/stretch Y (inverse)
+            originalScale.z
         );
     }
 
