@@ -54,13 +54,16 @@ public class KeyStart : MonoBehaviour
 
         if (isPlayingNormally && frames.Length > 0)
         {
-            timer += Time.deltaTime;
-            
-            if (timer >= 1f / framesPerSecond)
+            if (connectedEnergy == null || connectedEnergy.HasEnergy)
             {
-                timer = 0f;
-                currentFrameIndex = (currentFrameIndex + 1) % frames.Length;
-                spriteRenderer.sprite = frames[currentFrameIndex];
+                timer += Time.deltaTime;
+                
+                if (timer >= 1f / framesPerSecond)
+                {
+                    timer = 0f;
+                    currentFrameIndex = (currentFrameIndex + 1) % frames.Length;
+                    spriteRenderer.sprite = frames[currentFrameIndex];
+                }
             }
         }
     }

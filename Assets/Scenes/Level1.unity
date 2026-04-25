@@ -220,7 +220,7 @@ GameObject:
   - component: {fileID: 92597290}
   - component: {fileID: 92597294}
   - component: {fileID: 92597295}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,6 +401,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   turnSpeed: 20
+  walkWobbleSpeed: 15
+  walkWobbleAngle: 10
+  walkWobbleReturnSpeed: 10
 --- !u!114 &92597295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3039,7 +3042,8 @@ GameObject:
   - component: {fileID: 721904349}
   - component: {fileID: 721904348}
   - component: {fileID: 721904350}
-  m_Layer: 0
+  - component: {fileID: 721904351}
+  m_Layer: 9
   m_Name: NormalToy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3090,7 +3094,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -201105974054226671, guid: 0aa2bd1719670144d9227c145bceaaf3, type: 3}
+  m_Sprite: {fileID: -8696148182482206613, guid: a18df4b740215dd4299aada400a3e4ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -3174,6 +3178,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   turnSpeed: 20
+  walkWobbleSpeed: 15
+  walkWobbleAngle: 7
+  walkWobbleReturnSpeed: 10
 --- !u!70 &721904349
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -3225,6 +3232,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxEnergy: 100
   energyDepleteRate: 10
+--- !u!95 &721904351
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721904343}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 34de61b7e55f77f44a6938838c37413c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &736845884
 GameObject:
   m_ObjectHideFlags: 0
@@ -4208,7 +4237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1337383056}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4224,7 +4253,7 @@ Transform:
   m_GameObject: {fileID: 1337383055}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.289, y: -1.19, z: 0}
+  m_LocalPosition: {x: -0.05, y: -1.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5668,6 +5697,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FrogKey
       objectReference: {fileID: 0}
+    - target: {fileID: 1127621061249076996, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5803513491260266376, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.70314026
@@ -5822,7 +5855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2066704509}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5994,6 +6027,10 @@ PrefabInstance:
     - target: {fileID: 1127621061249076996, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
       propertyPath: m_Name
       value: Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 1127621061249076996, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5803513491260266376, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
       propertyPath: m_LocalPosition.x

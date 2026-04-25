@@ -22,6 +22,11 @@ public class NormalToyMovement : MonoBehaviour
     public LayerMask groundLayer;
     public float turnSpeed = 20f;
 
+    [Header("Walk Juice")]
+    public float walkWobbleSpeed = 15f;
+    public float walkWobbleAngle = 10f;
+    public float walkWobbleReturnSpeed = 10f;
+
     public bool IsControlled { get; private set; } = false;
 
     private Rigidbody2D rb;
@@ -33,10 +38,13 @@ public class NormalToyMovement : MonoBehaviour
     private bool isFacingRight = true;
     private float originalScaleX;
     private float targetScaleX;
+    private float wobbleTimer;
+    private Animator anim;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponentInChildren<Animator>();
         defaultGravity = rb.gravityScale;
         originalScaleX = Mathf.Abs(transform.localScale.x);
         targetScaleX = originalScaleX;
@@ -74,6 +82,14 @@ public class NormalToyMovement : MonoBehaviour
         if (!IsControlled || toyEnergy == null || !toyEnergy.HasEnergy)
         {
             horizontalInput = 0f;
+            
+            if (anim != null)
+            {
+                anim.SetBool("isJumping", !isGrounded);
+                anim.SetFloat("xVelocity", 0f);
+                anim.SetFloat("yVelocity", rb.linearVelocity.y);
+            }
+            
             return; 
         }
 
@@ -108,6 +124,30 @@ public class NormalToyMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
             coyoteTimeCounter = 0f;
+        }
+
+        if (Mathf.Abs(horizontalInput) > 0.01f && isGrounded)
+        {
+            wobbleTimer += Time.deltaTime * walkWobbleSpeed;
+            float zRotation = Mathf.Sin(wobbleTimer) * walkWobbleAngle;
+            
+            Vector3 euler = transform.localEulerAngles;
+            euler.z = zRotation;
+            transform.localEulerAngles = euler;
+        }
+        else
+        {
+            wobbleTimer = 0f;
+            Vector3 euler = transform.localEulerAngles;
+            euler.z = Mathf.LerpAngle(euler.z, 0f, Time.deltaTime * walkWobbleReturnSpeed);
+            transform.localEulerAngles = euler;
+        }
+
+        if (anim != null)
+        {
+            anim.SetBool("isJumping", !isGrounded);
+            anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
+            anim.SetFloat("yVelocity", rb.linearVelocity.y);
         }
     }
 
