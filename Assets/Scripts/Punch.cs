@@ -38,13 +38,11 @@ public class Punch : MonoBehaviour
 
     IEnumerator PunchAnim()
     {
-        // switch sprite
         sr.sprite = extended;
 
-        // enable hitbox briefly
+        // turn on hitbox briefly
         hitbox.SetActive(true);
 
-        // move forward
         Vector3 target = startPos + new Vector3(punchDistance, 0, 0);
 
         float t = 0;
@@ -55,10 +53,10 @@ public class Punch : MonoBehaviour
             yield return null;
         }
 
-        // disable hitbox quickly after impact
+        // disable hitbox after impact
         hitbox.SetActive(false);
 
-        // move back
+        // return back
         t = 0;
         while (t < 1)
         {
@@ -67,7 +65,6 @@ public class Punch : MonoBehaviour
             yield return null;
         }
 
-        // reset sprite
         sr.sprite = retracted;
     }
 }
