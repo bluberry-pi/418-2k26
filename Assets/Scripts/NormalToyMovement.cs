@@ -85,7 +85,8 @@ public class NormalToyMovement : MonoBehaviour
             
             if (anim != null)
             {
-                anim.SetBool("isJumping", !isGrounded);
+                bool playJumpAnim = !isGrounded && (coyoteTimeCounter <= 0f || rb.linearVelocity.y > 1.5f);
+                anim.SetBool("isJumping", playJumpAnim);
                 anim.SetFloat("xVelocity", 0f);
                 anim.SetFloat("yVelocity", rb.linearVelocity.y);
             }
@@ -145,7 +146,9 @@ public class NormalToyMovement : MonoBehaviour
 
         if (anim != null)
         {
-            anim.SetBool("isJumping", !isGrounded);
+            // Prevent tiny bumps/wobbles from flickering the jump animation
+            bool playJumpAnim = !isGrounded && (coyoteTimeCounter <= 0f || rb.linearVelocity.y > 1f);
+            anim.SetBool("isJumping", playJumpAnim);
             anim.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
             anim.SetFloat("yVelocity", rb.linearVelocity.y);
         }
