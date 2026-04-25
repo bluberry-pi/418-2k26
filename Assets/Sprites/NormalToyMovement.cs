@@ -27,6 +27,7 @@ public class NormalToyMovement : MonoBehaviour
     private float jumpBufferCounter;
     private float defaultGravity;
     private bool isGrounded;
+    private bool isFacingRight = true;
 
     void Start()
     {
@@ -37,6 +38,15 @@ public class NormalToyMovement : MonoBehaviour
     void Update()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        if (horizontalInput > 0f && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0f && isFacingRight)
+        {
+            Flip();
+        }
 
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
 
@@ -93,5 +103,13 @@ public class NormalToyMovement : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
+    }
+
+    private void Flip()
+    {
+        isFacingRight = !isFacingRight;
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1f;
+        transform.localScale = localScale;
     }
 }
