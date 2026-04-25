@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5803513491260266376}
   - component: {fileID: 2320229038095224617}
-  - component: {fileID: 6699975646695876954}
+  - component: {fileID: 2692878829299764966}
+  - component: {fileID: 7241652096914814940}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -88,25 +89,74 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6699975646695876954
-Animator:
-  serializedVersion: 7
+--- !u!61 &2692878829299764966
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127621061249076996}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 76cd869dfc5ddcf43bcae46e00e54047, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.040537894, y: -0.11472297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 5}
+    newSize: {x: 5, y: 5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.8651154, y: 1.0742924}
+  m_EdgeRadius: 0
+--- !u!114 &7241652096914814940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127621061249076996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b70d23c277e9db446ba83398ac50cbb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frames:
+  - {fileID: 21300000, guid: cb1485d9de806f9488fb28c8e81fd4bc, type: 3}
+  - {fileID: 21300000, guid: 17e7cc6e6cfe7c44b990cf85936032ec, type: 3}
+  - {fileID: 21300000, guid: 93b48514cb27fa44a87bdaa21d502a0a, type: 3}
+  - {fileID: 21300000, guid: 3d1092a8055a24f459671af3ce7eec48, type: 3}
+  - {fileID: 21300000, guid: abafd828ae4fd7b4788835eac0f4ea3c, type: 3}
+  - {fileID: 21300000, guid: 60ae2e1246a116f469aa38a2282540cc, type: 3}
+  - {fileID: 21300000, guid: af3d56cd4052f4b4abda51212863f318, type: 3}
+  - {fileID: 21300000, guid: 200364a73a7a60d4581bb669a0c011aa, type: 3}
+  - {fileID: 21300000, guid: b0d97255bb1aeeb499d27729cd82a720, type: 3}
+  framesPerSecond: 11.25
+  framesToSkipOnClick: 2
+  clicksToStartPlaying: 4

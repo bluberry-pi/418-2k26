@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class NormalToyMovement : MonoBehaviour
 {
+    [Header("Game Flow")]
+    [Tooltip("Drag the Key object here so the player knows when to start moving.")]
+    public KeyStart startingKey;
+
     [Header("Movement")]
     public float moveSpeed = 8f;
     public float airSpeedMultiplier = 0.8f;
@@ -41,34 +45,12 @@ public class NormalToyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         defaultGravity = rb.gravityScale;
         
-        // Store the starting size so we know what to scale back to
         originalScaleX = Mathf.Abs(transform.localScale.x);
         targetScaleX = originalScaleX;
     }
 
     void Update()
     {
-        horizontalInput = Input.GetAxisRaw("Horizontal");
-
-        // Input checks for flipping
-        if (horizontalInput > 0f && !isFacingRight)
-        {
-            Flip();
-        }
-        else if (horizontalInput < 0f && isFacingRight)
-        {
-            Flip();
-        }
-
-        // Smoothly transition the scale to make the flip look natural
-        if (Mathf.Abs(transform.localScale.x - targetScaleX) > 0.01f)
-        {
-            Vector3 currentScale = transform.localScale;
-            currentScale.x = Mathf.Lerp(currentScale.x, targetScaleX, turnSpeed * Time.deltaTime);
-            transform.localScale = currentScale;
-        }
-
-        // Ground check
         isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
 
         if (isGrounded)
@@ -80,7 +62,30 @@ public class NormalToyMovement : MonoBehaviour
             coyoteTimeCounter -= Time.deltaTime;
         }
 
-        // Jump buffering
+        if (Mathf.Abs(transform.localScale.x - targetScaleX) > 0.01f)
+        {
+            Vector3 currentScale = transform.localScale;
+            currentScale.x = Mathf.Lerp(currentScale.x, targetScaleX, turnSpeed * Time.deltaTime);
+            transform.localScale = currentScale;
+        }
+
+        if (startingKey != null && !startingKey.isPlayingNormally)
+        {
+            horizontalInput = 0f;
+            return;
+        }
+
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        if (horizontalInput > 0f && !isFacingRight)
+        {
+            Flip();
+        }
+        else if (horizontalInput < 0f && isFacingRight)
+        {
+            Flip();
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             jumpBufferCounter = jumpBufferTime;
@@ -90,7 +95,6 @@ public class NormalToyMovement : MonoBehaviour
             jumpBufferCounter -= Time.deltaTime;
         }
 
-        // Execute Jump
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
@@ -98,7 +102,6 @@ public class NormalToyMovement : MonoBehaviour
             coyoteTimeCounter = 0f;
         }
 
-        // Variable Jump Height (releasing jump early)
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -117,7 +120,6 @@ public class NormalToyMovement : MonoBehaviour
         
         rb.AddForce(accelRate * speedDiff * Vector2.right);
 
-        // Apply heavier gravity when falling
         if (rb.linearVelocity.y < 0)
         {
             rb.gravityScale = defaultGravity * fallGravityMultiplier;
@@ -127,14 +129,12 @@ public class NormalToyMovement : MonoBehaviour
             rb.gravityScale = defaultGravity;
         }
 
-        // Clamp fall speed
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
     }
 
     private void Flip()
     {
         isFacingRight = !isFacingRight;
-        // Instead of instantly changing the scale, we set a target for the Update loop to smoothly blend towards
         targetScaleX = isFacingRight ? originalScaleX : -originalScaleX;
     }
 }
