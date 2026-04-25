@@ -12,6 +12,8 @@ public class ToyManager : MonoBehaviour
     private NormalToyMovement currentToy;
     private ToyEnergy currentEnergy;
 
+    public NormalToyMovement CurrentToy => currentToy;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;

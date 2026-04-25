@@ -8,6 +8,7 @@ TagManager:
   - Physics
   - PhyDoor
   - Crate
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -7,6 +7,16 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // ── Enemy hit ──────────────────────────────────────────────
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyScript enemy = other.GetComponent<EnemyScript>();
+            if (enemy != null)
+                enemy.Die();
+            return;
+        }
+
+        // ── PhyDoor hit ────────────────────────────────────────────
         if (other.CompareTag("PhyDoor"))
         {
             // Instantiate the broken prefab instantly if one is assigned
