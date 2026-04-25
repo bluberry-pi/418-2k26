@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017318975013533954}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrokenDoor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 648636153072115730}
   - component: {fileID: 9044707606660685313}
   - component: {fileID: 3610641626956735311}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrokenDoor1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 1293872076845757837}
   - component: {fileID: 7897612627922680390}
   - component: {fileID: 5419289080449852930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BrokenDoor1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

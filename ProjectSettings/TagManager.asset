@@ -7,6 +7,7 @@ TagManager:
   - Toy
   - Physics
   - PhyDoor
+  - Crate
   layers:
   - Default
   - TransparentFX

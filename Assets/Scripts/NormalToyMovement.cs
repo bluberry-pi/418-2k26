@@ -6,13 +6,14 @@ public class NormalToyMovement : MonoBehaviour
     public ToyEnergy toyEnergy;
 
     public float moveSpeed = 8f;
-    public float airSpeedMultiplier = 0.8f;
+    public float airSpeedMultiplier = 0.9f;  // Max horizontal speed in air (fraction of moveSpeed)
     public float acceleration = 13f;
     public float deceleration = 16f;
-    public float airControlMultiplier = 0.5f;
+    public float airControlMultiplier = 0.75f; // How quickly you can accelerate/change dir in air
     
-    public float jumpForce = 13f;
+    public float jumpForce = 11f;
     public float fallGravityMultiplier = 2.5f;
+    public float riseGravityMultiplier = 1.4f; // Gravity strength while rising (>1 = snappier/punchier rise)
     public float maxFallSpeed = 15f;
     public float coyoteTime = 0.15f;
     public float jumpBufferTime = 0.15f;
@@ -48,6 +49,19 @@ public class NormalToyMovement : MonoBehaviour
         defaultGravity = rb.gravityScale;
         originalScaleX = Mathf.Abs(transform.localScale.x);
         targetScaleX = originalScaleX;
+
+        // Automatically fix the "sticking to walls / can't jump while touching a wall" issue
+        // by removing physics friction from the player so they slide smoothly against walls.
+        PhysicsMaterial2D noFriction = new PhysicsMaterial2D("NoFriction");
+        noFriction.friction = 0f;
+        noFriction.bounciness = 0f;
+        
+        rb.sharedMaterial = noFriction;
+        Collider2D[] colliders = GetComponents<Collider2D>();
+        foreach (Collider2D col in colliders)
+        {
+            col.sharedMaterial = noFriction;
+        }
     }
 
     public void SetControl(bool state)
@@ -125,6 +139,8 @@ public class NormalToyMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
             coyoteTimeCounter = 0f;
+            // Apply fall gravity immediately so the character doesn't float after jump cut
+            rb.gravityScale = defaultGravity * fallGravityMultiplier;
         }
 
         if (Mathf.Abs(horizontalInput) > 0.01f && isGrounded)
@@ -182,11 +198,18 @@ public class NormalToyMovement : MonoBehaviour
 
         if (rb.linearVelocity.y < 0)
         {
+            // Falling: fast fall
             rb.gravityScale = defaultGravity * fallGravityMultiplier;
         }
-        else
+        else if (isGrounded)
         {
+            // On ground: reset gravity so next jump starts clean
             rb.gravityScale = defaultGravity;
+        }
+        else if (rb.linearVelocity.y > 0)
+        {
+            // Rising: slightly increased gravity for a punchy, fast-paced rise
+            rb.gravityScale = defaultGravity * riseGravityMultiplier;
         }
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Max(rb.linearVelocity.y, -maxFallSpeed));
