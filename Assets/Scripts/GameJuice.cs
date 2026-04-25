@@ -74,6 +74,13 @@ public class GameJuice : MonoBehaviour
         // This ensures the ambient wobble is always applied even when no shake is running.
         if (noise != null)
             noise.AmplitudeGain = currentAmplitude;
+
+        // Press R → reload current scene
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Time.timeScale = 1f; // reset in case a hit-freeze was mid-way
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     void OnEnable()  => SceneManager.sceneLoaded += OnSceneLoaded;

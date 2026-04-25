@@ -41,7 +41,8 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
+    // ── 2D Collision (solid colliders) ──────────────────────────
+    void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Toy"))
         {
@@ -50,7 +51,7 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    void OnCollisionExit(Collision collision)
+    void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Toy"))
         {
@@ -63,8 +64,8 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    // Adding trigger support just in case the plate or toy uses 'Is Trigger'
-    void OnTriggerEnter(Collider other)
+    // ── 2D Trigger (if plate or toy uses Is Trigger) ─────────────
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Toy"))
         {
@@ -73,7 +74,7 @@ public class PressurePlate : MonoBehaviour
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Toy"))
         {
@@ -86,3 +87,4 @@ public class PressurePlate : MonoBehaviour
         }
     }
 }
+
