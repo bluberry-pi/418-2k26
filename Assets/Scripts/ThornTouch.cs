@@ -23,6 +23,13 @@ public class ThornTouch : MonoBehaviour
 
         if (toy != null)
         {
+            // ── Juice ──────────────────────────────────────────────
+            if (GameJuice.Instance != null)
+            {
+                GameJuice.Instance.ShakeDeath();
+                GameJuice.Instance.Flash();
+            }
+
             if (deathParticlePrefab != null)
             {
                 Instantiate(deathParticlePrefab, toy.transform.position, Quaternion.identity);

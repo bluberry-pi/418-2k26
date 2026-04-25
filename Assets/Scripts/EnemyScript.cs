@@ -85,6 +85,13 @@ public class EnemyScript : MonoBehaviour
     {
         isDying = true;
 
+        // ── Juice ─────────────────────────────────────────────────
+        if (GameJuice.Instance != null)
+        {
+            GameJuice.Instance.HitFreeze();
+            GameJuice.Instance.ShakeDeath();
+        }
+
         // Freeze physics
         rb.linearVelocity = Vector2.zero;
         rb.bodyType = RigidbodyType2D.Kinematic;

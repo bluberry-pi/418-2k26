@@ -7,6 +7,13 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        // ── Juice on any hit ───────────────────────────────────────
+        if (GameJuice.Instance != null)
+        {
+            GameJuice.Instance.ShakeHit();
+            GameJuice.Instance.HitFreeze();
+        }
+
         // ── Enemy hit ──────────────────────────────────────────────
         if (other.CompareTag("Enemy"))
         {
