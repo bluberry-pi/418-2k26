@@ -6,7 +6,7 @@ public class SceneController : MonoBehaviour
     public static SceneController instance;
     private void Awake()
     {
-        if(instance = null)
+        if(instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);

@@ -12,6 +12,7 @@ public class ToyManager : MonoBehaviour
     private NormalToyMovement currentToy;
     private AeroplaneMovement currentAeroplane;
     private ToyEnergy currentEnergy;
+    private KeyStart  currentKeyStart;   // tracks whose music is active
 
     public NormalToyMovement CurrentToy => currentToy;
 
@@ -28,8 +29,13 @@ public class ToyManager : MonoBehaviour
         }
     }
 
-    public void SwitchToy(NormalToyMovement newToy, ToyEnergy newEnergy)
+    public void SwitchToy(NormalToyMovement newToy, ToyEnergy newEnergy, KeyStart keyStart = null)
     {
+        // Stop the previous toy's music immediately
+        if (currentKeyStart != null && currentKeyStart != keyStart)
+            currentKeyStart.StopMusicImmediate();
+        currentKeyStart = keyStart;
+
         // Revoke any current control
         if (currentToy != null)       currentToy.SetControl(false);
         if (currentAeroplane != null) currentAeroplane.SetControl(false);
@@ -50,8 +56,13 @@ public class ToyManager : MonoBehaviour
         }
     }
 
-    public void SwitchAeroplane(AeroplaneMovement newPlane, ToyEnergy newEnergy)
+    public void SwitchAeroplane(AeroplaneMovement newPlane, ToyEnergy newEnergy, KeyStart keyStart = null)
     {
+        // Stop the previous toy's music immediately
+        if (currentKeyStart != null && currentKeyStart != keyStart)
+            currentKeyStart.StopMusicImmediate();
+        currentKeyStart = keyStart;
+
         // Revoke any current control
         if (currentToy != null)       currentToy.SetControl(false);
         if (currentAeroplane != null) currentAeroplane.SetControl(false);

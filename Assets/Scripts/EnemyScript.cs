@@ -17,11 +17,16 @@ public class EnemyScript : MonoBehaviour
     public float deathExpandScale = 2.2f;
     public float deathDuration = 0.35f;
 
+    [Header("Kill Effect")]
+    [Tooltip("Particle prefab to spawn at the toy's position when the enemy kills it.")]
+    public GameObject toyDeathParticlePrefab;
+
     // ── internals ──────────────────────────────────────────────
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    private bool isActive = false;
-    private bool isDying = false;
+    private bool isActive  = false;
+    private bool isDying   = false;
+    private bool hasLanded = false;   // true once the enemy touches the ground after falling
     private Vector3 originalScale;
     private float wiggleTimer;
 
@@ -48,6 +53,16 @@ public class EnemyScript : MonoBehaviour
     {
         if (!isActive || isDying) return;
 
+        // ── Wait until we have actually landed before chasing ───
+        if (!hasLanded)
+        {
+            // Consider landed when vertical velocity is near zero and we are grounded
+            if (Mathf.Abs(rb.linearVelocity.y) < 0.5f)
+                hasLanded = true;
+            else
+                return; // still falling — do nothing except let gravity work
+        }
+
         Transform target = GetTarget();
         if (target == null) return;
 
@@ -70,6 +85,43 @@ public class EnemyScript : MonoBehaviour
             originalScale.y / scalePulse,                        // squash/stretch Y (inverse)
             originalScale.z
         );
+    }
+
+    // ── Kill the currently-controlled toy on contact ────────────
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        TryKillToy(col.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        TryKillToy(other.gameObject);
+    }
+
+    private void TryKillToy(GameObject other)
+    {
+        if (isDying) return;
+
+        // Only react to objects on the Toy layer
+        if (other.layer != LayerMask.NameToLayer("Toy")) return;
+
+        // Only kill the *currently controlled* toy
+        if (ToyManager.Instance == null) return;
+        NormalToyMovement toy = ToyManager.Instance.CurrentToy;
+        if (toy == null || other != toy.gameObject) return;
+
+        // ── Juice ──────────────────────────────────────────────────
+        if (GameJuice.Instance != null)
+        {
+            GameJuice.Instance.ShakeDeath();
+            GameJuice.Instance.Flash();
+        }
+
+        // ── Spawn death particle at toy position ───────────────────
+        if (toyDeathParticlePrefab != null)
+            Instantiate(toyDeathParticlePrefab, other.transform.position, Quaternion.identity);
+
+        Destroy(other);
     }
 
     // ── Called by HitBox when the punch lands ──────────────────

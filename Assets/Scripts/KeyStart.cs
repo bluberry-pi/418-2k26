@@ -151,20 +151,27 @@ public class KeyStart : MonoBehaviour
 
         if (connectedAeroplane != null)
         {
-            // Aeroplane path — ToyManager doesn't know about AeroplaneMovement directly,
-            // so we call SetControl manually and just update the slider via SwitchToy with null toy.
-            // We pass null for the NormalToyMovement and handle aeroplane control ourselves.
-            ToyManager.Instance.SwitchAeroplane(connectedAeroplane, connectedEnergy);
+            ToyManager.Instance.SwitchAeroplane(connectedAeroplane, connectedEnergy, this);
         }
         else if (connectedToy != null)
         {
-            ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy);
+            ToyManager.Instance.SwitchToy(connectedToy, connectedEnergy, this);
         }
     }
 
     // ─────────────────────────────────────────────────────────────────
     //  Music helpers
     // ─────────────────────────────────────────────────────────────────
+
+    /// Called by ToyManager when another toy is selected — kills music instantly.
+    public void StopMusicImmediate()
+    {
+        if (musicFadeCoroutine != null) StopCoroutine(musicFadeCoroutine);
+        musicFadeCoroutine = null;
+        musicSource.volume = 0f;
+        musicSource.Stop();
+        wasMusicPlaying = false;
+    }
 
     /// Smoothly fade the music AudioSource to targetVolume over duration seconds.
     private void FadeMusic(float targetVolume, float duration)

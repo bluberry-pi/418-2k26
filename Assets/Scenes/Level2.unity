@@ -5950,6 +5950,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &458186127
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6822229605451257332, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_Name
+      value: soundeffect manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486146620128584194, guid: b910fb872b91b764792be3febc650ec4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b910fb872b91b764792be3febc650ec4, type: 3}
 --- !u!1 &461716463
 GameObject:
   m_ObjectHideFlags: 0
@@ -7573,7 +7630,7 @@ GameObject:
   - component: {fileID: 576981570}
   - component: {fileID: 576981569}
   - component: {fileID: 576981571}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8247,7 +8304,7 @@ GameObject:
   - component: {fileID: 599310866}
   - component: {fileID: 599310865}
   - component: {fileID: 599310867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10771,6 +10828,7 @@ MonoBehaviour:
   deathParticlePrefab: {fileID: 3310245308953624941, guid: ac08a8f6d8feb9c478a92ddf985d1602, type: 3}
   deathExpandScale: 2.2
   deathDuration: 0.35
+  toyDeathParticlePrefab: {fileID: 0}
 --- !u!50 &771634702
 Rigidbody2D:
   serializedVersion: 5
@@ -11625,7 +11683,7 @@ GameObject:
   - component: {fileID: 822000505}
   - component: {fileID: 822000504}
   - component: {fileID: 822000506}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11951,7 +12009,7 @@ GameObject:
   - component: {fileID: 834218377}
   - component: {fileID: 834218376}
   - component: {fileID: 834218378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13760,11 +13818,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4663044997297892843, guid: be6811cb5cb84d347af3e93d82951a8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.423115
+      value: 102.9
       objectReference: {fileID: 0}
     - target: {fileID: 4663044997297892843, guid: be6811cb5cb84d347af3e93d82951a8f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5543056
+      value: 7.7799997
       objectReference: {fileID: 0}
     - target: {fileID: 4663044997297892843, guid: be6811cb5cb84d347af3e93d82951a8f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17269,7 +17327,7 @@ GameObject:
   - component: {fileID: 1202258050}
   - component: {fileID: 1202258049}
   - component: {fileID: 1202258051}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20685,6 +20743,7 @@ MonoBehaviour:
   deathParticlePrefab: {fileID: 3310245308953624941, guid: ac08a8f6d8feb9c478a92ddf985d1602, type: 3}
   deathExpandScale: 2.2
   deathDuration: 0.35
+  toyDeathParticlePrefab: {fileID: 0}
 --- !u!50 &1401726556
 Rigidbody2D:
   serializedVersion: 5
@@ -21641,7 +21700,7 @@ GameObject:
   - component: {fileID: 1463928846}
   - component: {fileID: 1463928845}
   - component: {fileID: 1463928847}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26389,6 +26448,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 1127621061249076996, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5803513491260266376, guid: ba2f5a3ba67c14947ac18835bf46fe22, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.359
@@ -26892,11 +26955,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4775344137143667098, guid: 88ca8c4917f787948a967e64e0c62c56, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -17.423115
+      value: 102.9
       objectReference: {fileID: 0}
     - target: {fileID: 4775344137143667098, guid: 88ca8c4917f787948a967e64e0c62c56, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.5543056
+      value: 7.7799997
       objectReference: {fileID: 0}
     - target: {fileID: 4775344137143667098, guid: 88ca8c4917f787948a967e64e0c62c56, type: 3}
       propertyPath: m_LocalPosition.z
@@ -26937,7 +27000,7 @@ PrefabInstance:
     - target: {fileID: 6699225548962481728, guid: 88ca8c4917f787948a967e64e0c62c56, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
-      objectReference: {fileID: 1796557604}
+      objectReference: {fileID: 1802764986}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -27194,11 +27257,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 63fef6c519c20b94783dd1a4684a9d7f, type: 3}
---- !u!4 &1796557604 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2967730850675830925, guid: 63fef6c519c20b94783dd1a4684a9d7f, type: 3}
-  m_PrefabInstance: {fileID: 1796557603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1802764984
 GameObject:
   m_ObjectHideFlags: 0
@@ -27213,9 +27271,9 @@ GameObject:
   - component: {fileID: 1802764989}
   - component: {fileID: 1802764988}
   - component: {fileID: 1802764990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Aero
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31463,3 +31521,4 @@ SceneRoots:
   - {fileID: 747858868}
   - {fileID: 1819679694}
   - {fileID: 1918815837}
+  - {fileID: 458186127}

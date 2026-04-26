@@ -91,15 +91,15 @@ public class AeroplaneMovement : MonoBehaviour
             targetAngle = 0f;  // level out when flying left/right without W
 
         // ── Smooth rotation ──────────────────────────────────────
-        float visualAngle = facingRight ? targetAngle : -targetAngle;
+        float visualAngle = !facingRight ? targetAngle : -targetAngle;
         float currentAngle = transform.localEulerAngles.z;
         if (currentAngle > 180f) currentAngle -= 360f;
         float newZ = Mathf.LerpAngle(currentAngle, visualAngle, rotationSpeed * Time.deltaTime);
         transform.localEulerAngles = new Vector3(0f, 0f, newZ);
 
         // ── Facing direction ─────────────────────────────────────
-        if (d) facingRight = true;
-        if (a) facingRight = false;
+        if (a) facingRight = true;
+        if (d) facingRight = false;
 
         targetScaleX = facingRight ? originalScaleX : -originalScaleX;
         Vector3 scale = transform.localScale;
