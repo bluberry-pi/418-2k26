@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70d23c277e9db446ba83398ac50cbb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  connectedToy: {fileID: 0}
+  connectedAeroplane: {fileID: 0}
+  connectedEnergy: {fileID: 0}
   frames:
   - {fileID: 21300000, guid: cb1485d9de806f9488fb28c8e81fd4bc, type: 3}
   - {fileID: 21300000, guid: 17e7cc6e6cfe7c44b990cf85936032ec, type: 3}
@@ -159,5 +162,14 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b0d97255bb1aeeb499d27729cd82a720, type: 3}
   framesPerSecond: 11.25
   framesToSkipOnClick: 2
+  clickSounds:
+  - {fileID: 8300000, guid: 2ab04e88de5f5d04ab158bb0c849843c, type: 3}
+  - {fileID: 8300000, guid: ec906c17747a9de479b8c44d407922ca, type: 3}
+  - {fileID: 8300000, guid: dcf53b19c62c3ed45bed5a16ba42c234, type: 3}
+  - {fileID: 8300000, guid: f9cba1e2c3541284c955426b848b1ff5, type: 3}
   clicksToStartPlaying: 4
+  toyMusic: {fileID: 8300000, guid: 80447e684b8b828489d9988fc6062325, type: 3}
+  musicVolume: 0.62
+  musicFadeInDuration: 0.8
+  musicFadeOutDuration: 2
   isPlayingNormally: 0

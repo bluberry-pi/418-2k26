@@ -28,6 +28,11 @@ public class NormalToyMovement : MonoBehaviour
     public float walkWobbleAngle = 10f;
     public float walkWobbleReturnSpeed = 10f;
 
+    [Header("Sound FX")]
+    public AudioClip jumpSound;
+    public AudioClip wooshSound;
+    [Range(0f, 1f)] public float sfxVolume = 1f;
+
     public bool IsControlled { get; private set; } = false;
     // True when the toy has horizontal input OR is airborne (jumping/falling)
     public bool IsMoving => Mathf.Abs(horizontalInput) > 0.01f || !isGrounded;
@@ -69,7 +74,11 @@ public class NormalToyMovement : MonoBehaviour
     public void SetControl(bool state)
     {
         IsControlled = state;
-        if (!state)
+        if (state)
+        {
+            PlayWoosh();
+        }
+        else
         {
             horizontalInput = 0f;
         }
@@ -135,6 +144,7 @@ public class NormalToyMovement : MonoBehaviour
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
             jumpBufferCounter = 0f;
             coyoteTimeCounter = 0f;
+            PlayJump();
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
@@ -221,5 +231,19 @@ public class NormalToyMovement : MonoBehaviour
     {
         isFacingRight = !isFacingRight;
         targetScaleX = isFacingRight ? originalScaleX : -originalScaleX;
+    }
+
+    // ── Sound helpers ─────────────────────────────────────────────────
+
+    private void PlayJump()
+    {
+        if (jumpSound == null || SoundFXManager.instance == null) return;
+        SoundFXManager.instance.PlaySoundFXClip(jumpSound, transform, sfxVolume);
+    }
+
+    private void PlayWoosh()
+    {
+        if (wooshSound == null || SoundFXManager.instance == null) return;
+        SoundFXManager.instance.PlaySoundFXClip(wooshSound, transform, sfxVolume);
     }
 }
