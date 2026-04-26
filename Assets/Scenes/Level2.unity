@@ -13537,7 +13537,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 1401726555}
   - {fileID: 771634701}
 --- !u!61 &817258467
 BoxCollider2D:
@@ -23979,7 +23978,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1401726552
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -31782,7 +31781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxEnergy: 100
-  energyDepleteRate: 11
+  energyDepleteRate: 6
 --- !u!1 &1815597855
 GameObject:
   m_ObjectHideFlags: 0

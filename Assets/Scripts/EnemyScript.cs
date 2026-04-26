@@ -26,7 +26,8 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer sr;
     private bool isActive  = false;
     private bool isDying   = false;
-    private bool hasLanded = false;   // true once the enemy touches the ground after falling
+    private bool hasFallen = false;   // true once the enemy has actually started falling
+    private bool hasLanded = false;   // true once the enemy has touched the ground
     private Vector3 originalScale;
     private float wiggleTimer;
 
@@ -53,10 +54,18 @@ public class EnemyScript : MonoBehaviour
     {
         if (!isActive || isDying) return;
 
-        // ── Wait until we have actually landed before chasing ───
+        // ── Wait until we have actually fallen and landed before chasing ───
         if (!hasLanded)
         {
-            // Consider landed when vertical velocity is near zero and we are grounded
+            // Step 1: wait until the enemy is actually moving downward (has started falling)
+            if (!hasFallen)
+            {
+                if (rb.linearVelocity.y < -1f)
+                    hasFallen = true;
+                return; // still at rest or just activated — keep waiting
+            }
+
+            // Step 2: once falling, wait for near-zero vertical velocity (landed)
             if (Mathf.Abs(rb.linearVelocity.y) < 0.5f)
                 hasLanded = true;
             else
